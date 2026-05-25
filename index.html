@@ -327,10 +327,25 @@
     border: 2px solid var(--void);
   }
 
+
   @keyframes rotateBorder {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
+
+  .parallax-bg {
+    position: fixed;
+    inset: -30%;
+    background-image: url('bg.png');
+    background-size: cover;
+    background-position: center top;
+    opacity: 0.07;
+    filter: saturate(0.3) brightness(0.5);
+    will-change: transform;
+    z-index: 0;
+    pointer-events: none;
+  }
+
 
   /* Animation delays for links */
   .link-item:nth-child(1) { animation-delay: 0.1s; }
@@ -370,6 +385,8 @@
 </style>
 </head>
 <body>
+
+<div class="parallax-bg" id="parallax"></div>
 
 <div class="bracket bracket-tl"></div>
 <div class="bracket bracket-tr"></div>
@@ -476,5 +493,13 @@
 
 </div>
 
+
+<script>
+  const bg = document.getElementById('parallax');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY * 0.3;
+    bg.style.transform = `translateY(${y}px)`;
+  }, { passive: true });
+</script>
 </body>
 </html>
